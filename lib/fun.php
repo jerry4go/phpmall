@@ -13,4 +13,14 @@ function mysqlInit($host,$username,$password,$dbName)
 	
 	return $con;
 }
+
+// 对密码进行加密处理
+function createPassword($password)
+{
+	if(!$password)
+	{
+		return false;
+	}
+	return md5(md5($password).'IMOOC');
+}
 ?>

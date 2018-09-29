@@ -1,4 +1,5 @@
 <?php
+header("Content-Type:text/html; charset=UTF-8");
 //表单进行了提交处理
 if(!empty($_POST['username'])){
 	
@@ -49,7 +50,20 @@ if(!empty($_POST['username'])){
 	}
 	
 	// 密码加密处理
+	$password = createPassword($password);
 	
+	unset($obj,$result,$sql);
+	
+	$sql = "INSERT im_user(username,password,create_time) VALUES('{$username}','{$password}','{$_SERVER['REQUEST_TIME']}')";
+	
+	$obj = mysqli_query($con,$sql);
+	
+	if($obj)
+	{
+		$userId = mysqli_insert_id($con);
+		
+		echo sprintf("恭喜您注册成功，用户名是：%s,用户ID是:%s",$username,$userId);exit;
+	}
 	
 	echo '<pre>';
 }
