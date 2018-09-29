@@ -54,7 +54,7 @@ if(!empty($_POST['username'])){
 	
 	unset($obj,$result,$sql);
 	
-	$sql = "INSERT im_user(username,password,create_time) VALUES('{$username}','{$password}','{$_SERVER['REQUEST_TIME']}')";
+	$sql = "INSERT im_user(username,password,create_time) VALUES('{$username}','{$password}',NOW())";
 	
 	$obj = mysqli_query($con,$sql);
 	
