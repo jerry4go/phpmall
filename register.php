@@ -1,6 +1,9 @@
 <?php
 //表单进行了提交处理
 if(!empty($_POST['username'])){
+	
+	include_once './lib/fun.php';
+	
 	$username = trim($_POST['username']); // mysql_real_escape_string()进行过滤
 	$password = trim($_POST['password']);
 	$repassword = trim($_POST['repassword']);
@@ -21,6 +24,15 @@ if(!empty($_POST['username'])){
 	if($repassword !== $password){
 		echo '两次输入的密码不一致，请重新输入';exit;
 	}
+	
+	//数据库操作
+	$con = mysqlInit('127.0.0.1','root','root','imocc_mall');
+	
+	if(!$con){
+		echo mysql_errno();
+		exit;
+	}
+    
 	
 }
 ?>
