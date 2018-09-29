@@ -26,14 +26,32 @@ if(!empty($_POST['username'])){
 	}
 	
 	//数据库操作
-	$con = mysqlInit('127.0.0.1','root','root','imocc_mall');
+	$con = mysqlInit('127.0.0.1','root','root','imooc_mall');
 	
 	if(!$con){
-		echo mysql_errno();
+		echo mysqli_errno();
 		exit;
 	}
-    
+	echo '<pre>';
 	
+	$sql = "SELECT COUNT('id') as total FROM im_user WHERE username='{$username}'";
+	
+	$obj = mysqli_query($con,$sql);
+	
+	$result= mysqli_fetch_assoc($obj);
+	
+	var_dump($result);
+	
+	// 验证用户是否存在数据库中
+	if(isset($result['total']) && $result['total'] >0)
+	{
+		echo '用户已经存在';
+	}
+	
+	// 密码加密处理
+	
+	
+	echo '<pre>';
 }
 ?>
 <!DOCTYPE html>
