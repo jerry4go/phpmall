@@ -1,3 +1,11 @@
+<?php
+//表单进行了提交处理
+if(!empty($_POST['username'])){
+	$username = trim($_POST['username']); // mysql_real_escape_string()进行过滤
+	$password = trim($_POST['password']);
+	$repassword = trim($_POST['repassword']);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
