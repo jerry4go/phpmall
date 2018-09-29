@@ -4,6 +4,24 @@ if(!empty($_POST['username'])){
 	$username = trim($_POST['username']); // mysql_real_escape_string()进行过滤
 	$password = trim($_POST['password']);
 	$repassword = trim($_POST['repassword']);
+	
+	// 判断用户名不能为空
+	if(!$username){
+		echo '用户名不能为空';exit;
+	}
+	// 判断密码不能为空
+	if(!$password){
+		echo '密码不能为空';exit;
+	}
+	// 判断确认密码不能为空
+	if(!$repassword){
+		echo '确认密码不能为空';exit;
+	}
+	// 判断两次输入的密码是否一致
+	if($repassword !== $password){
+		echo '两次输入的密码不一致，请重新输入';exit;
+	}
+	
 }
 ?>
 <!DOCTYPE html>
