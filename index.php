@@ -1,3 +1,7 @@
+<?php
+header("Content-Type:text/html; charset=UTF-8");
+echo '商品中心';exit;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
