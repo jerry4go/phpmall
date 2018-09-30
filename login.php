@@ -1,4 +1,5 @@
 <?php
+// 设置页面编码，正常显示中文
 header("Content-Type:text/html; charset=UTF-8");
 
 // 开启session
