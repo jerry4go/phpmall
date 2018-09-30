@@ -1,5 +1,13 @@
 <?php
 header("Content-Type:text/html; charset=UTF-8");
+
+// 判断用户是否已经登录
+if(!isset($_SESSION['user']) || empty($_SESSION['user']))
+{
+	header('Location:login.php');
+	exit;
+}
+
 echo '商品中心';exit;
 ?>
 <!DOCTYPE html>
