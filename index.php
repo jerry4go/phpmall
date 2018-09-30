@@ -1,6 +1,8 @@
 <?php
 header("Content-Type:text/html; charset=UTF-8");
 
+// 开启session
+session_start();
 // 判断用户是否已经登录
 if(!isset($_SESSION['user']) || empty($_SESSION['user']))
 {
