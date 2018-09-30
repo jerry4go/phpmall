@@ -46,7 +46,7 @@ if(!empty($_POST['username'])){
 	// 验证用户是否存在数据库中
 	if(isset($result['total']) && $result['total'] >0)
 	{
-		echo '用户已经存在';
+		echo '用户已经存在';exit;
 	}
 	
 	// 密码加密处理
@@ -63,6 +63,9 @@ if(!empty($_POST['username'])){
 		$userId = mysqli_insert_id($con);
 		
 		echo sprintf("恭喜您注册成功，用户名是：%s,用户ID是:%s",$username,$userId);exit;
+	}else
+	{
+		echo mysqli_error($con);exit;	
 	}
 	
 	echo '<pre>';
