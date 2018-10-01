@@ -38,7 +38,7 @@ function msg($type,$msg=null,$url=null)
 	// 当msg为空时,toUrl不写入
 	$toUrl.= $msg?"&msg={$msg}":'';
 	// 当url为空时，toUrl不写入
-	$toUrl.=$url?"$url={$url}":'';
+	$toUrl.=$url?"&url={$url}":'';
 	header($toUrl);
 	exit;
 }

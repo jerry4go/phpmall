@@ -11,19 +11,19 @@ if(!empty($_POST['username'])){
 	
 	// 判断用户名不能为空
 	if(!$username){
-		echo '用户名不能为空';exit;
+		msg(2,'用户名不能为空');
 	}
 	// 判断密码不能为空
 	if(!$password){
-		echo '密码不能为空';exit;
+		msg(2,'密码不能为空');
 	}
 	// 判断确认密码不能为空
 	if(!$repassword){
-		echo '确认密码不能为空';exit;
+		msg(2,'确认密码不能为空');
 	}
 	// 判断两次输入的密码是否一致
 	if($repassword !== $password){
-		echo '两次输入的密码不一致，请重新输入';exit;
+		msg(2,'两次输入的密码不一致，请重新输入');
 	}
 	
 	//数据库操作
@@ -46,7 +46,7 @@ if(!empty($_POST['username'])){
 	// 验证用户是否存在数据库中
 	if(isset($result['total']) && $result['total'] >0)
 	{
-		echo '用户已经存在';exit;
+		msg(2,'用户已经存在');
 	}
 	
 	// 密码加密处理
@@ -60,12 +60,14 @@ if(!empty($_POST['username'])){
 	
 	if($obj)
 	{
-		$userId = mysqli_insert_id($con);
-		
-		echo sprintf("恭喜您注册成功，用户名是：%s,用户ID是:%s",$username,$userId);exit;
+	msg(1,'恭喜您注册成功','login.php');
+	//$userId = mysqli_insert_id($con);
+	
+	//echo sprintf("恭喜您注册成功，用户名是：%s,用户ID是:%s",$username,$userId);exit;
 	}else
 	{
-		echo mysqli_error($con);exit;	
+		msg(2,mysqli_error($con));
+		//echo mysqli_error($con);exit;	
 	}
 	
 	echo '<pre>';
