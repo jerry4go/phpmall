@@ -22,6 +22,7 @@ if(!empty($_POST['username']))
 	// 判断用户名不能为空
 	if(!$username){
 		echo '用户名不能为空';exit;
+		
 	}
 	// 判断密码不能为空
 	if(!$password){

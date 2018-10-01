@@ -23,4 +23,24 @@ function createPassword($password)
 	}
 	return md5(md5($password).'IMOOC');
 }
+
+// 提示页面封装
+
+/**
+* 消息提示
+* @param int $type 1:成功 2:失败
+* @param null $msg
+* @param null $url
+*/
+function msg($type,$msg=null,$url=null)
+{
+	$toUrl = "Location:msg.php?type={$type}";
+	// 当msg为空时,toUrl不写入
+	$toUrl.= $msg?"&msg={$msg}":'';
+	// 当url为空时，toUrl不写入
+	$toUrl.=$url?"$url={$url}":'';
+	header($toUrl);
+	exit;
+}
+
 ?>
