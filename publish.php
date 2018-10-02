@@ -17,13 +17,61 @@ $user = $_SESSION['user'];
 //对表单进行了提交处理
 if(!empty($_POST['name']))
 {
-	$file = $_FILES['file'];
+	$con = mysqlInit('127.0.0.1','root','root','imooc_mall');
+	// 特殊字符转义 字符串前后空格去除
+	// 画品简介
+	$name = mysqli_real_escape_string(trim($_POST['name']));
+	// 画品价格
+	$price = intval($_POST['price']);
+	// 画品描述
+	$des = mysqli_real_escape_string(trim($_POST['des']));
+	// 画品详情
+	$content = mysqli_real_escape_string(trim($_POST['content']));
+	
+	$nameLength = mb_strlen($name,'utf-8');
+	if($nameLength<=0 ||$nameLength>30)
+	{
+		msg(2,'画品名应在1-30字符之内');
+	}
+	
+	if($price <= 0 ||$price>99999999)
+	{
+		msg(2,'画品价格应小于99999999');
+	}
+	
+	$desLength = mb_strlen($des,'utf-8');
+	if($desLength<=0 ||$desLength>100)
+	{
+		msg(2,'画品简介应在1-100字符之内');
+	}
+	
+	if(empty($content))
+	{
+		msg(2,'画品详情不能为空');
+	}
+	
+	
+	$userId = $user['id'];
 	$now = $_SERVER['REQUEST_TIME'];
+	$pic = imgUpload($file);
 	
-	$img = imgUpload($file);
+	// 建议大家做商品名称唯一性验证
 
+	// 入库处理
 	
-	echo $img;die;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 } 
 
