@@ -20,16 +20,17 @@ if(!empty($_POST['name']))
 	$con = mysqlInit('127.0.0.1','root','root','imooc_mall');
 	// 特殊字符转义 字符串前后空格去除
 	// 画品简介
-	$name = mysqli_real_escape_string(trim($_POST['name']));
+	$name = mysqli_real_escape_string($con,trim($_POST['name']));
+	
 	// 画品价格
 	$price = intval($_POST['price']);
 	// 画品描述
-	$des = mysqli_real_escape_string(trim($_POST['des']));
+	$des = mysqli_real_escape_string($con,trim($_POST['des']));
 	// 画品详情
-	$content = mysqli_real_escape_string(trim($_POST['content']));
+	$content = mysqli_real_escape_string($con,trim($_POST['content']));
 	
 	$nameLength = mb_strlen($name,'utf-8');
-	if($nameLength<=0 ||$nameLength>30)
+	if($nameLength<=0||$nameLength>30)
 	{
 		msg(2,'画品名应在1-30字符之内');
 	}
@@ -53,12 +54,26 @@ if(!empty($_POST['name']))
 	
 	$userId = $user['id'];
 	$now = $_SERVER['REQUEST_TIME'];
+	
+	$file = $_FILES['file'];
+	// 上传图片 调用封装函数
 	$pic = imgUpload($file);
 	
 	// 建议大家做商品名称唯一性验证
 
 	// 入库处理
+    $sql = "INSERT `im_goods`(`name`,`price`,`des`,`content`,`pic`,`user_id`,`create_time`,`update_time`,`view`) 
+	values('{$name}','{$price}','{$des}','{$content}','{$pic}','{$userId}','{$now}','{$now}',0)";
 	
+	if($obj = mysqli_query($con,$sql))
+	{
+		msg(1,'操作成功','index.php');
+	}
+	else
+	{
+		echo mysqli_error($con);exit;
+	}
+
 	
 	
 	
